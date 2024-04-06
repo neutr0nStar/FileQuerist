@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block main %}
+
+<main
+    style="
+        background-color: rgba(255, 255, 255, 0.5); 
+        backdrop-filter: blur(16px);
+        height: 90dvh;
+        overflow-y: auto;
+    "
+    class="container m-4 p-4 rounded"
+    >
+    <div class="h2">Result</div>
+    <br>
+
+    <!-- Score -->
+    <div class="card">
+        <div class="card-header fw-bold">Your score</div>
+        <div class="card-body">
+            <div class="display-6">{{ score }} %</div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Results -->
+    {% for r in res %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <strong>{{ r['question'] }}</strong>
+                <br>
+                <br>
+                <strong>Your response: </strong> {{ r['response'] }}
+                <br>
+                <strong>Correct answer: </strong> {{ r['answer'] }}
+                <br>
+                <div class="d-flex">
+                    <strong>Status: &nbsp;&nbsp;</strong>
+                    {% if r['response'] == r['answer'] %}
+                        <div class="text-success fw-bold">Correct</div>
+                    {% else %}
+                        <div class="text-danger fw-bold">Incorrect</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+
+    <!-- New -->
+    <a href="/" class="btn btn-primary">New test</a>
+    <br>
+
+</main>
+
+{% endblock %}

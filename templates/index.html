@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FileQuerist</title>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div
+      style="
+        height: 100vh;
+        width: 100vw;
+        background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      "
+      class="d-flex justify-content-center align-items-center"
+    >
+    {% block main %}
+      <main
+        style="
+            background-color: rgba(255, 255, 255, 0.5); 
+            backdrop-filter: blur(16px);
+            width: 720px;
+        "
+        class="m-4 p-4 rounded"
+      >
+        <div class="h2">Welcome to FileQuerist</div>
+        <br>
+
+        <!-- Get document -->
+        <form action="/QnA" method="post" enctype=multipart/form-data>
+            <label for="formFile" class="form-label">Upload a file to begin</label>
+            <input required class="form-control" type="file" id="formFile" name="document" accept=".txt">
+            <br>
+            <label for="numQues" class="form-label">Select number of questions</label>
+            <input required type="number" class="form-control" id="numQues" name="numQues" min="1" max="12" value="10">
+            <br>
+            <button id='submitBtn' class="btn btn-success" type="submit">Submit</button>
+        </form>
+      </main>
+    {% endblock %}
+    </div>
+
+    <script>
+      let btn = document.getElementById('submitBtn')
+      let inp = document.getElementById('formFile')
+      btn.onclick = function() {
+        if(inp.files.length !== 0) {
+          btn.classList.add('disabled')
+          btn.innerHTML = "<div class='spinner-border spinner-border-sm'></div><span> Loading</span>"
+        }
+      }
+    </script>
+
+  </body>
+</html>

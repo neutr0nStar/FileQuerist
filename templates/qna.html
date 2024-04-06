@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block main %}
+
+<main
+    style="
+        background-color: rgba(255, 255, 255, 0.5); 
+        backdrop-filter: blur(16px);
+        height: 90dvh;
+        overflow-y: auto;
+    "
+    class="container m-4 p-4 rounded"
+    >
+    <div class="h2">Questions and Answers</div>
+    <br>
+
+    <!-- Show qna -->
+    <form action="/result" method="post">
+    {% for qa in qna %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <div class="fw-bold">{{ qa['question'] }}</div>
+                <br>
+                <select class="form-select" name="{{ qa['question'] }}">
+                    <option value="">--Select one--</option>
+                    {% for op in qa['options'] %}
+                    <option value="{{ op }}">{{op}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endfor %}
+    <button class="btn btn-success px-5" type="submit">Submit</button>
+    <input class="btn btn-danger px-5" type="reset" value="Reset">
+    </form>
+            
+</main>
+
+{% endblock %}
